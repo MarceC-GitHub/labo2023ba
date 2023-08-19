@@ -5,7 +5,7 @@ require("data.table")
 require("rpart")
 
 PARAM <- list()
-PARAM$semilla <- 123457
+PARAM$semilla <- c(102191, 200177, 410551, 552581, 892237)
 
 #------------------------------------------------------------------------------
 # particionar agrega una columna llamada fold a un dataset
@@ -48,9 +48,9 @@ particionar(dataset, division = c(7, 3),
 
 
 param_basicos <- list(
-  "cp" = -1, # complejidad minima
-  "minsplit" = 400, # minima cantidad de regs en un nodo para hacer el split
-  "minbucket" = 10, # minima cantidad de regs en una hoja
+  "cp" = -0.5, # complejidad minima
+  "minsplit" = 1000, # minima cantidad de regs en un nodo para hacer el split
+  "minbucket" = 5, # minima cantidad de regs en una hoja
   "maxdepth" = 8 # profundidad máxima del arbol
 )
 
