@@ -19,15 +19,15 @@ PARAM$semilla <- 123457
 # parameetros rpart
 PARAM$rpart_param <- list(
   "cp" = -1,
-  "minsplit" = 500,
-  "minbucket" = 200,
-  "maxdepth" = 14
+  "minsplit" = 750,
+  "minbucket" = 500,
+  "maxdepth" = 10
 )
-nom_arch_param<-with(PARAM$rpart_param,paste0(
-  sprintf("cp%2d_",cp),
-  sprintf("ms%4d_",minsplit),
-  sprintf("mb%3d_",minbucket),
-  sprintf("md%2d_",maxdepth)
+nom_arch_param<-with(PARAM$rpart_param, paste0(
+  sprintf("cp%2d_", cp),
+  sprintf("ms%4d_", minsplit),
+  sprintf("mb%3d_", minbucket),
+  sprintf("md%2d_", maxdepth)
 ))
 # parametros  arbol
 # entreno cada arbol con solo 50% de las variables variables
@@ -57,7 +57,7 @@ setwd(carpeta_experimento)
 
 
 # que tamanos de ensemble grabo a disco, pero siempre debo generar los 500
-grabar <- c(1, 5, 10, 50, 100, 200, 300,400,500)
+grabar <- c(1, 5, 10, 50, 100, 200, 350, 500)
 
 
 # defino los dataset de entrenamiento y aplicacion
