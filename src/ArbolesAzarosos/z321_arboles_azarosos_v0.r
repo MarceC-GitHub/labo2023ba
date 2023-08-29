@@ -19,13 +19,8 @@ PARAM$semilla <- 123457
 # parameetros rpart
 PARAM$rpart_param <- list(
   "cp" = -1,
-<<<<<<< HEAD
-  "minsplit" = 250,
-  "minbucket" = 10,
-=======
   "minsplit" = 300,
   "minbucket" = 20,
->>>>>>> 7fd6966 (Vamos1)
   "maxdepth" = 10
 )
 nom_arch_param<-with(PARAM$rpart_param,paste0(
