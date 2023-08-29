@@ -63,10 +63,14 @@ setwd(carpeta_experimento)
 
 # que tamanos de ensemble grabo a disco, pero siempre debo generar los 500
 <<<<<<< HEAD
+<<<<<<< HEAD
 grabar <- c(1, 5, 10, 50, 100, 200, 300,400,500)
 =======
 grabar <- c(1, 5, 10, 50, 100, 200, 500)
 >>>>>>> 7fd6966 (Vamos1)
+=======
+grabar <- c(1, 5, 10, 50, 100, 200, 300,400,500)
+>>>>>>> 8d69f0f (veamos)
 
 
 # defino los dataset de entrenamiento y aplicacion
