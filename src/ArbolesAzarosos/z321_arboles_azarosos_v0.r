@@ -19,8 +19,13 @@ PARAM$semilla <- 123457
 # parameetros rpart
 PARAM$rpart_param <- list(
   "cp" = -1,
+<<<<<<< HEAD
   "minsplit" = 250,
   "minbucket" = 10,
+=======
+  "minsplit" = 300,
+  "minbucket" = 20,
+>>>>>>> 7fd6966 (Vamos1)
   "maxdepth" = 10
 )
 nom_arch_param<-with(PARAM$rpart_param,paste0(
@@ -57,7 +62,11 @@ setwd(carpeta_experimento)
 
 
 # que tamanos de ensemble grabo a disco, pero siempre debo generar los 500
+<<<<<<< HEAD
 grabar <- c(1, 5, 10, 50, 100, 200, 300,400,500)
+=======
+grabar <- c(1, 5, 10, 50, 100, 200, 500)
+>>>>>>> 7fd6966 (Vamos1)
 
 
 # defino los dataset de entrenamiento y aplicacion
