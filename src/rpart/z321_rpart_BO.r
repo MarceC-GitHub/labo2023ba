@@ -253,14 +253,13 @@ if (!file.exists(archivo_BO)) {
 }
 # retomo en caso que ya exista
 
-<<<<<<< HEAD
 # creo la carpeta del experimento en el bucket
 dir.create("~/buckets/b1/exp/", showWarnings = FALSE)
 dir.create("~/buckets/b1/exp/HT3210/", showWarnings = FALSE)
 
 # copio los archivos
 system( "cp -r ~/exp/HT3210/*  ~/buckets/b1/exp/HT3210" )
-=======
+
 
 
 
