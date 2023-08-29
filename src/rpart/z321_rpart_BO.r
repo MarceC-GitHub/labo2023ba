@@ -30,7 +30,7 @@ hs <- makeParamSet(
 )
 # minbuket NO PUEDE ser mayor que la mitad de minsplit
 
-ksemilla_azar <- 102191 # cambiar por la primer semilla
+ksemilla_azar <- 150523 # cambiar por la primer semilla
 
 #------------------------------------------------------------------------------
 # graba a un archivo los componentes de lista
@@ -196,8 +196,8 @@ dir.create("~/exp/HT3210/", showWarnings = FALSE)
 setwd("~/exp/HT3210/")
 
 
-archivo_log <- "HT321.txt"
-archivo_BO <- "HT321.RDATA"
+archivo_log <- "HT321_seed2.txt"
+archivo_BO <- "HT321_seed2.RDATA"
 
 # leo si ya existe el log
 #  para retomar en caso que se se corte el programa
@@ -253,9 +253,16 @@ if (!file.exists(archivo_BO)) {
 }
 # retomo en caso que ya exista
 
+<<<<<<< HEAD
 # creo la carpeta del experimento en el bucket
 dir.create("~/buckets/b1/exp/", showWarnings = FALSE)
 dir.create("~/buckets/b1/exp/HT3210/", showWarnings = FALSE)
 
 # copio los archivos
 system( "cp -r ~/exp/HT3210/*  ~/buckets/b1/exp/HT3210" )
+=======
+
+
+
+
+>>>>>>> a72ea5c (algo)
