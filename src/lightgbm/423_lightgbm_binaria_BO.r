@@ -35,10 +35,10 @@ options(error = function() {
 #  muy pronto esto se leera desde un archivo formato .yaml
 PARAM <- list()
 
-PARAM$experimento <- "HT4230"
+PARAM$experimento <- "HT4230" # nolint
 
 PARAM$input$dataset <- "./datasets/dataset_pequeno.csv"
-PARAM$input$training <- c(202107) # los meses en los que vamos a entrenar
+PARAM$input$training <- c(202107) # los meses en los que vamos a entrenar # nolint: object_name_linter.
 
 # un undersampling de 0.1  toma solo el 10% de los CONTINUA
 PARAM$trainingstrategy$undersampling <- 1.0
@@ -50,7 +50,7 @@ PARAM$hyperparametertuning$POS_ganancia <- 117000
 PARAM$hyperparametertuning$NEG_ganancia <- -3000
 
 # Aqui poner su segunda semilla
-PARAM$hyperparametertuning$semilla_azar <- 200177
+PARAM$hyperparametertuning$semilla_azar <- 150523
 #------------------------------------------------------------------------------
 
 # Aqui se cargan los bordes de los hiperparametros
@@ -107,7 +107,7 @@ fganancia_logistic_lightgbm <- function(probs, datos) {
   )
 
   tbl <- as.data.table(list("vprobs" = probs, "vgan" = vgan))
-  setorder(tbl, -vprobs)
+  setorder(tbl, -vprobs) # nolint
   ganancia <- tbl[1:GLOBAL_envios, sum(vgan)]
 
   return(list(
@@ -240,7 +240,7 @@ GLOBAL_gananciamax <- -1 # inicializo la variable global
 if (file.exists(klog)) {
   tabla_log <- fread(klog)
   GLOBAL_iteracion <- nrow(tabla_log)
-  GLOBAL_gananciamax <- tabla_log[, max(ganancia)]
+  GLOBAL_gananciamax <- tabla_log[, max(ganancia)] # nolint
 }
 
 
@@ -327,3 +327,4 @@ if (!file.exists(kbayesiana)) {
 
 
 cat("\n\nLa optimizacion Bayesiana ha terminado\n")
+
