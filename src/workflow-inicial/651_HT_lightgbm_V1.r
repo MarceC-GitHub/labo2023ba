@@ -55,7 +55,7 @@ PARAM$lgb_basicos <- list(
   max_bin = 31L, # lo debo dejar fijo, no participa de la BO
   num_iterations = 9999, # un numero muy grande, lo limita early_stopping_rounds
 
-  bagging_fraction = 1.0, # 0.0 < bagging_fraction <= 1.0
+  bagging_fraction = , # 0.0 < bagging_fraction <= 1.0
   pos_bagging_fraction = 1.0, # 0.0 < pos_bagging_fraction <= 1.0
   neg_bagging_fraction = 1.0, # 0.0 < neg_bagging_fraction <= 1.0
   is_unbalance = FALSE, #
@@ -80,6 +80,7 @@ PARAM$bo_lgb <- makeParamSet(
   makeIntegerParam("min_data_in_leaf", lower = 100L, upper = 50000L)
 )
 
+# Set Bagging Fraction to 0.75
 
 # si usted es ambicioso, y tiene paciencia, podria subir este valor a 100
 PARAM$bo_iteraciones <- 50 # iteraciones de la Optimizacion Bayesiana
