@@ -27,7 +27,7 @@ PARAM$finalmodel$learning_rate <- 0.02141704
 PARAM$finalmodel$feature_fraction <- 0.20031535
 PARAM$finalmodel$min_data_in_leaf <- 1663
 PARAM$finalmodel$num_leaves <- 21
-#### Con parametros de clase binaria1
+#### Con parametros optmizados
 
 PARAM$finalmodel$max_bin <- 31
 
