@@ -27,7 +27,7 @@ PARAM$finalmodel$learning_rate <- 0.0100746999
 PARAM$finalmodel$feature_fraction <- 0.5144127527
 PARAM$finalmodel$min_data_in_leaf <- 505
 PARAM$finalmodel$num_leaves <- 44
-#### Con parámetros dados por el  profesor
+#### Con par?metros dados por el  profesor
 
 PARAM$finalmodel$max_bin <- 31
 

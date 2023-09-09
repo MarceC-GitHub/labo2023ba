@@ -95,7 +95,7 @@ modelo <- lgb.train(
 #--------------------------------------
 # ahora imprimo la importancia de variables
 tb_importancia <- as.data.table(lgb.importance(modelo))
-archivo_importancia <- "impo.txt"
+archivo_importancia <- "impo_opt.txt"
 
 fwrite(tb_importancia,
   file = archivo_importancia,
@@ -120,7 +120,7 @@ tb_entrega[, prob := prediccion]
 
 # grabo las probabilidad del modelo
 fwrite(tb_entrega,
-  file = "prediccion.txt",
+  file = "prediccion_opt.txt",
   sep = "\t"
 )
 
@@ -140,7 +140,7 @@ for (envios in cortes) {
   tb_entrega[1:envios, Predicted := 1L]
 
   fwrite(tb_entrega[, list(numero_de_cliente, Predicted)],
-    file = paste0(PARAM$experimento, "_", envios, ".csv"),
+    file = paste0(PARAM$experimento, "_", envios, "opt.csv"),
     sep = ","
   )
 }
