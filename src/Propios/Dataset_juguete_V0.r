@@ -2,8 +2,8 @@ rm(list = ls()) # Borro todos los objetos
 gc() # Garbage Collection
 
 require("data.table")
-require("rpart")
 require("parallel")
+require("yaml")
 
 setwd("~/buckets/b1/") # Establezco el Working Directory
 
