@@ -11,7 +11,7 @@ setwd("~/buckets/b1/") # Establezco el Working Directory
 PARAM <- list()
 PARAM$dataset <- "./datasets/competencia_2023.csv.gz"
 
-PARAM$experimento <- "TOY"
+PARAM$experimento <- "TY7000"
 PARAM$porcentaje_clientes=.005
 
 
