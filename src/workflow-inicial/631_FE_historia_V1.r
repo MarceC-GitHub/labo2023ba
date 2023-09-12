@@ -80,7 +80,7 @@ GrabarOutput <- function() {
 # se calculan para los 6 meses previos el minimo, maximo y
 #  tendencia calculada con cuadrados minimos
 # la formula de calculo de la tendencia puede verse en
-#  https://stats.libretexts.org/Bookshelves/Introductory	_Statistics/Book%3A_Introductory_Statistics_(Shafer_and_Zhang)/10%3A_Correlation_and_Regression/10.04%3A_The_Least_Squares_Regression_Line
+#  https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Book%3A_Introductory_Statistics_(Shafer_and_Zhang)/10%3A_Correlation_and_Regression/10.04%3A_The_Least_Squares_Regression_Line
 # para la maxíma velocidad esta funcion esta escrita en lenguaje C,
 # y no en la porqueria de R o Python
 
@@ -660,6 +660,3 @@ cat(format(Sys.time(), "%Y%m%d %H%M%S"), "\n",
   file = "zRend.txt",
   append = TRUE
 )
-
-# Canaritos Asesinos ratio = 1
-# PARAM$experimento <- "FE6311"

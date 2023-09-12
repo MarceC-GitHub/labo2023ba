@@ -19,7 +19,7 @@ PARAM$variables_intrames <- TRUE # atencion esto esta en TRUE
 
 # valores posibles
 #  "ninguno", "rank_simple", "rank_cero_fijo", "deflacion", "estandarizar"
-PARAM$metodo <- "deflacion"
+PARAM$metodo <- "rank_cero_fijo"
 
 PARAM$home <- "~/buckets/b1/"
 # FIN Parametros del script
@@ -330,5 +330,3 @@ cat(format(Sys.time(), "%Y%m%d %H%M%S"), "\n",
   file = "zRend.txt",
   append = TRUE
 )
-
-# Usé Deflación como metodo
