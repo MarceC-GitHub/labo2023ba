@@ -40,7 +40,7 @@ PARAM$exp_input <- "HT6512"
 
 # Atencion, que cada modelos se procesa con 5 semillas, ajuste a SUS necesidades
 # Que modelos quiero, segun su posicion en el ranking e la Bayesian Optimizacion, ordenado por ganancia descendente
-PARAM$modelos_rank <- c(1)
+PARAM$modelos_rank <- c(1:5)
 
 # reemplazar por las propias semillas
 PARAM$semillas <- c(123457, 150523, 370003, 737797, 910003)
