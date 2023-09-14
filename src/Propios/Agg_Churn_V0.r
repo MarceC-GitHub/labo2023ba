@@ -45,7 +45,7 @@ dataset[, tmobile_app := NULL]# creo la carpeta donde va el experimento
 # creo la carpeta donde va el experimento
 dir.create(paste0("./exp/", PARAM$experimento, "/"), showWarnings = FALSE)
 # Establezco el Working Directory donde va Datos de Churn
-setwd(paste0("./dataset/", PARAM$experimento, "/"))
+setwd(paste0("./exp/", PARAM$experimento, "/"))
 
 #------------------------------------------------------------------------------
 # Creo dataset con cantidad de cada clase historica
