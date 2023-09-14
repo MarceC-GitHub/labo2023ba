@@ -15,18 +15,19 @@ PARAM$experimento <- "TS6410"
 
 PARAM$exp_input <- "FE6310"
 
-# me salteo los meses duros de pandemia y todo lo anterior asumiendo cambio de tendencia
-# entreno en 11 meses
+# aparentemente hay corte estructural en agosto de 2020 (antes venían bajando
+# las BAJAS+2 globales y a partir de ahí, empezaron a subir
+# entreno en 10 meses
 
 PARAM$future <- c(202109)
 PARAM$final_train <- c(
   202107, 202106, 202105, 202104, 202103, 202102,
-  202101, 202012, 202011, 202010, 202009
+  202101, 202012, 202011, 202010 
 )
 
 PARAM$train$training <- c(
   202105, 202104, 202103, 202102, 202101, 202012, 
-  202011, 202010, 202009, 202008, 202007
+  202011, 202010, 202009, 202008 
 )
 
 PARAM$train$validation <- c(202106)
