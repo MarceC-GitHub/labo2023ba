@@ -77,7 +77,7 @@ GrabarOutput <- function() {
 OUTPUT$PARAM <- PARAM
 OUTPUT$time$start <- format(Sys.time(), "%Y%m%d %H%M%S")
 
-base_dir <- "~/buckets/b2/"
+base_dir <- "~/buckets/b3/"
 
 # creo la carpeta donde va el experimento
 dir.create(paste0(base_dir, "exp/", PARAM$experimento, "/"),
