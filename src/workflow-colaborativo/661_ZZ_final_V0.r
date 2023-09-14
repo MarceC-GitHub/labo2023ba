@@ -54,7 +54,7 @@ PARAM$graficar$envios_desde <- 8000L
 PARAM$graficar$envios_hasta <- 20000L
 PARAM$graficar$ventana_suavizado <- 2001L
 
-PARAM$home <- "~/buckets/b2/"
+PARAM$home <- "~/buckets/b3/"
 # FIN Parametros del script
 
 OUTPUT <- list()

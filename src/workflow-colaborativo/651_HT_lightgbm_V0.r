@@ -84,7 +84,7 @@ PARAM$bo_lgb <- makeParamSet(
 # si usted es ambicioso, y tiene paciencia, podria subir este valor a 100
 PARAM$bo_iteraciones <- 50 # iteraciones de la Optimizacion Bayesiana
 
-PARAM$home <- "~/buckets/b1/"
+PARAM$home <- "~/buckets/b3/"
 
 # FIN Parametros del script
 

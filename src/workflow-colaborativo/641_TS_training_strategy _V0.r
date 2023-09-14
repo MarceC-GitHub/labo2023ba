@@ -39,7 +39,7 @@ PARAM$train$undersampling <- 0.1
 
 PARAM$train$semilla <- 123457 # cambiar por su propia semilla  !!!
 
-PARAM$home <- "~/buckets/b2/"
+PARAM$home <- "~/buckets/b3/"
 # FIN Parametros del script
 
 
