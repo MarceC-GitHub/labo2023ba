@@ -14,7 +14,7 @@ PARAM$home <- "~/buckets/b1/"
 #PARAM$home <- "D:\\DOCS\\Cursos\\DS\\Lab1\\Codigo\\labo2023ba\\"
 
 PARAM$dataset_orig <- "./datasets/competencia_2023.csv.gz"
-PARAM$dataset_final <- "./datasets/competencia_2023_aug.csv.gz"
+PARAM$dataset_final <- "competencia_2023_aug.csv.gz"
 
 #PARAM$dataset_orig <- "./datasets/dataset_toy.csv"
 #PARAM$dataset_final <- "dataset_toy_aug.csv"
