@@ -10,14 +10,14 @@ PARAM <- list()
 # reemplazar por las propias semillas
 PARAM$experimento <- "AG7000"
 
-PARAM$home <- "~/buckets/b1/"
-#PARAM$home <- "D:\\DOCS\\Cursos\\DS\\Lab1\\Codigo\\labo2023ba\\"
+#PARAM$home <- "~/buckets/b1/"
+PARAM$home <- "D:\\DOCS\\Cursos\\DS\\Lab1\\Codigo\\labo2023ba\\"
 
 PARAM$dataset_orig <- "./datasets/competencia_2023.csv.gz"
 PARAM$dataset_final <- "./datasets/competencia_2023_aug.csv.gz"
 
-#PARAM$dataset_orig <- "./datasets/dataset_toy.csv"
-#PARAM$dataset_final <- "dataset_toy_aug.csv"
+PARAM$dataset_orig <- "./datasets/dataset_toy.csv"
+PARAM$dataset_final <- "dataset_toy_aug.csv"
 
 PARAM$ST <- "./datasets/Macro_vars.csv"
 PARAM$CHURN <- "./datasets/churn_agg.csv"
@@ -34,7 +34,7 @@ colnames(churn_agg)<-c("foto_mes","churn")
 churn_agg<-rbind(churn_agg,data.table(foto_mes=202109,churn=1063/165237))
 return(churn_agg)
 }
-
+reference<-PARAM$CHURN
 #-------------------------------------------------------------------------------
 # Lee archivos con series de tiempo (excluyendo churn agregado)
 leer_series_de_tiempo<-function(reference){
@@ -88,7 +88,8 @@ data_st<-agregar_series_tiempo(dataset,series_de_tiempo)
 
 # cargo churn agregado
 churn_agg<-transformar_churn(PARAM$CHURN)
-
+churn_agg[,columna:=.I]
+plot(churn_agg[,columna],churn_agg[,churn])
 # Agrego churn agregado por mes
 data_st<-agregar_series_tiempo(data_st,churn_agg)            
 
