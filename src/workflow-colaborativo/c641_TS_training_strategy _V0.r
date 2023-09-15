@@ -11,9 +11,9 @@ require("yaml")
 
 # Parametros del script
 PARAM <- list()
-PARAM$experimento <- "cTS6410"
+PARAM$experimento <- "TS6410"
 
-PARAM$exp_input <- "cFE6310"
+PARAM$exp_input <- "FE6310"
 
 # aparentemente hay corte estructural en agosto de 2020 (antes venían bajando
 # las BAJAS+2 globales y a partir de ahí, empezaron a subir
@@ -39,7 +39,7 @@ PARAM$train$undersampling <- 0.1
 
 PARAM$train$semilla <- 123457 # cambiar por su propia semilla  !!!
 
-PARAM$home <- "~/buckets/b1/"
+PARAM$home <- "~/buckets/b3/"
 # FIN Parametros del script
 
 
