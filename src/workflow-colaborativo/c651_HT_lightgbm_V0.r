@@ -27,9 +27,9 @@ options(error = function() {
 
 # Parametros del script
 PARAM <- list()
-PARAM$experimento <- "HT6510"
+PARAM$experimento <- "cHT6510"
 
-PARAM$exp_input <- "TS6410"
+PARAM$exp_input <- "cTS6410"
 
 # En caso que se haga cross validation, se usa esta cantidad de folds
 PARAM$lgb_crossvalidation_folds <- 5
@@ -84,7 +84,7 @@ PARAM$bo_lgb <- makeParamSet(
 # si usted es ambicioso, y tiene paciencia, podria subir este valor a 100
 PARAM$bo_iteraciones <- 50 # iteraciones de la Optimizacion Bayesiana
 
-PARAM$home <- "~/buckets/b3/"
+PARAM$home <- "~/buckets/b1/"
 
 # FIN Parametros del script
 
