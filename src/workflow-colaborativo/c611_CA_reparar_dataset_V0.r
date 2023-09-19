@@ -1,3 +1,5 @@
+
+
 # Experimentos Colaborativos Default
 # Workflow  Catastrophe Analysis
 
@@ -16,8 +18,7 @@ PARAM$dataset <- "./datasets/competencia_2023.csv.gz"
 # valores posibles
 #  "MachineLearning"  "EstadisticaClasica" "Ninguno"
 PARAM$metodo <- "MachineLearning"
-PARAM$data <- "~/buckets/b1/"  # El archivo original está en el buckets/b1/
-PARAM$home <- "~/buckets/b1/"  # Paso a buckets/b1/
+PARAM$home <- "~/buckets/b1/"
 
 # FIN Parametros del script
 
@@ -213,7 +214,7 @@ Corregir_MachineLearning <- function(dataset) {
 OUTPUT$PARAM <- PARAM
 OUTPUT$time$start <- format(Sys.time(), "%Y%m%d %H%M%S")
 
-setwd(PARAM$data)
+setwd(PARAM$home)
 
 # cargo el dataset
 dataset <- fread(PARAM$dataset)
@@ -221,15 +222,11 @@ dataset <- fread(PARAM$dataset)
 # tmobile_app se daño a partir de 202010
 dataset[, tmobile_app := NULL]
 
-# Voy a usar buckets/b3 a partir de ahora
-
-setwd(PARAM$home)
 
 # creo la carpeta donde va el experimento
 dir.create(paste0("./exp/", PARAM$experimento, "/"), showWarnings = FALSE)
 # Establezco el Working Directory DEL EXPERIMENTO
 setwd(paste0("./exp/", PARAM$experimento, "/"))
-getwd()   # Chequeo
 
 GrabarOutput()
 write_yaml(PARAM, file = "parametros.yml") # escribo parametros utilizados

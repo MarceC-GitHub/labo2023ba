@@ -18,9 +18,7 @@ PARAM$exp_input <- "cFE6310"
 # me salteo los meses duros de pandemia, pero llego hasta 201907 en training
 # entreno en 18 meses
 
-PARAM$future_g <- c(202107)
-PARAM$future_k <- c(202109)
-
+PARAM$future <- c(202109)
 PARAM$final_train <- c(
   202107, 202106, 202105, 202104, 202103, 202102,
   202101, 202012, 202011, 202010, 202009, 202008, 202002, 202001, 201912,
@@ -87,21 +85,12 @@ write_yaml(PARAM, file = "parametros.yml") # escribo parametros utilizados
 
 setorder(dataset, foto_mes, numero_de_cliente)
 
-
-# grabo los datos del futuro para Kaggle
-fwrite(dataset[foto_mes %in% PARAM$future_k, ],
-  file = "dataset_future_k.csv.gz",
+# grabo los datos del futuro
+fwrite(dataset[foto_mes %in% PARAM$future, ],
+  file = "dataset_future.csv.gz",
   logical01 = TRUE,
   sep = ","
 )
-
-# grabo los datos del futuro para Graficos
-fwrite(dataset[foto_mes %in% PARAM$future_g, ],
-       file = "dataset_future_g.csv.gz",
-       logical01 = TRUE,
-       sep = ","
-)
-
 
 # grabo los datos donde voy a entrenar los Final Models
 fwrite(dataset[foto_mes %in% PARAM$final_train, ],
