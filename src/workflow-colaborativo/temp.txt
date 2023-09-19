@@ -41,3 +41,89 @@ nrow(diff)
 diff
 diff<-fsetdiff(funion(otra,otra3),otra3)
 iter_log<
+
+fwrite(iter_log,
+       file = "log_iteraciones",
+       sep = ",")
+fwrite(iter_log,
+       file = "log_iteraciones",
+       sep = ",")
+# Escribo los titulos al archivo donde van a quedar los resultados
+# atencion que si ya existe el archivo, esta instruccion LO SOBREESCRIBE,
+#  y lo que estaba antes se pierde
+# la forma que no suceda lo anterior es con append=TRUE
+arch_simuls <- paste0(
+  "modelo_",
+  #	  PARAM$version,"_",
+  nombre_raiz,
+  ".model"
+)
+
+#------------------------------------------------------------------------------
+# Me fijo si ya se han hecho algunas de las simulaciones propuestas
+if (!file.exists("log_iteraciones.txt")){   # No hay ninguna hecha
+  cat(
+    file ="log_iteraciones.txt",
+    sep = "",
+    "version", "\t",
+    "modelo_rank", "\t",
+    "vsemilla", "\n"
+  )  
+}else{                                      # Voy a simular las no hechas
+  iter_anteriores<-fread("log_iteraciones.txt")
+  iter_anteriores<-iter_anteriores[version==PARAM$version]
+  iter_anteriores<-iter_anteriores[,version:=NULL]
+  
+  iter_propuestas<-data.table(expand.grid(modelo_rank=PARAM$modelos_rank,
+                                          vsemilla=PARAM$semillas))
+
+  if (nrow(iter_anteriores)>0)  {
+    simul<-fsetdiff(funion(iter_anteriores,iter_propuestas),iter_anteriores)
+  }else{
+    simul<-iter_propuestas
+  }
+  rm(iter_anteriores,iter_propuestas)
+
+}
+#------------------------------------------------------------------------------
+
+fwrite(simul,
+       file = "log_iteraciones.csv",
+       sep = ",")
+rm(simuls_hechas)
+
+cat(
+  file = "log_iteraciones.txt",
+  append = TRUE,
+  sep = "",
+  PARAM$version, "\t",
+  modelo_rank, "\t",
+  vsemilla, "\n"
+)
+
+cat(
+  file = "log_iteraciones.txt",
+  append = TRUE,
+  sep = "",
+  PARAM$version, ",", #"\t",
+  modelo_rank, ",", #"\t",
+  vsemilla, "\n"
+)
+cat(
+  file ="log_iteraciones1.txt",
+  sep = "",
+#  append = TRUE,
+  "max_depth", "\t",",",
+  "ganancia_promedio", "\n"
+)
+
+cat(
+  file ="log_iteraciones1.txt",
+  sep = "",
+  #  append = TRUE,
+  modelo_rank, "\t",",",
+  vsemilla, "\n"
+)
+
+
+	

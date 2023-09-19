@@ -43,7 +43,7 @@ PARAM$exp_input <- "cHT6511"
 PARAM$modelos_rank <- c(1)
 
 # reemplazar por las propias semillas
-PARAM$semillas <- c(123457, 150523, 370003, 737797, 910003)
+PARAM$semillas <- c(123457 , 150523, 370003, 737797, 910003)
 
 PARAM$kaggle$envios_desde <- 9500L
 PARAM$kaggle$envios_hasta <- 11500L
@@ -392,3 +392,4 @@ cat(format(Sys.time(), "%Y%m%d %H%M%S"), "\n",
   file = "zRend.txt",
   append = TRUE
 )
+	
