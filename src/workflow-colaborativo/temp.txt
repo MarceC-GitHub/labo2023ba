@@ -1,0 +1,43 @@
+# Ejemplo
+
+otra<-data.table(modelos_rank=c(1,2,1,2,3),semillas=c(123457,123457,150523,150523,123457))   
+iter_log<-otra   
+fwrite(iter_log,
+       file = "log_iteraciones",
+       sep = ",")
+
+
+otra<-data.table(modelos_rank=c(1,2,1,2,3),semillas=c(123457,123457,150523,150523,123457))
+otra2<-data.table(modelos_rank=c(1,2,1),semillas=c(123457,123457,150523))
+otra3<-data.table(modelos_rank=c(1,2,1,2,3),semillas=c(123457,123457,150523,150523,150523))
+otra<-data.table(modelos_rank=c(1,2,1,2),semillas=c(123457,123457,150523,1))
+simul
+
+#library(data.table)
+
+# Convert into data.table, melt
+#setDT(d1)
+#d1 <- d1[, list(VarName = names(.SD), TableOne = unlist(.SD, use.names = F)),by=c('Last_Name','First_Name')]
+
+#setDT(d2)
+#d2 <- d2[, list(VarName = names(.SD), TableTwo = unlist(.SD, use.names = F)),by=c('Last_Name','First_Name')]
+
+# Set keys for merging
+setkey(simul,modelos_rank,semillas)
+setkey(otra,modelos_rank,semillas)
+
+# Merge, remove duplicates
+simul[otra,nomatch=0]
+simul[otra]
+otra[simul,nomatch=0]
+diff<-fsetdiff(funion(otra,simul),otra)
+nrow(diff)
+# Merge, remove duplicates
+simul[otra2,nomatch=0]
+simul[otra2]
+otra[simul,nomatch=0]
+diff<-fsetdiff(funion(otra2,simul),otra2)
+nrow(diff)
+diff
+diff<-fsetdiff(funion(otra,otra3),otra3)
+iter_log<
