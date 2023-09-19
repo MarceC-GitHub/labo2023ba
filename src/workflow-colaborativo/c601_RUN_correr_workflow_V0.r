@@ -10,7 +10,7 @@ options(error = function() {
 # corrida de cada paso del workflow
 
 # primeros pasos, relativamente rapidos
-source("~/labo2023ba/src/workflow-colaborativo/c611_CA_reparar_dataset_0.r")
+source("~/labo2023ba/src/workflow-colaborativo/c611_CA_reparar_dataset_V0.r")
 source("~/labo2023ba/src/workflow-colaborativo/c621_DR_corregir_drifting_V0.r")
 source("~/labo2023ba/src/workflow-colaborativo/c631_FE_historia_V0.r")
 source("~/labo2023ba/src/workflow-colaborativo/c641_TS_training_strategy_V0.r")
