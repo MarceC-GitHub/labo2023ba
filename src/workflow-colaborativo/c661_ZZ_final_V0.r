@@ -1,4 +1,5 @@
-# Experimentos Colaborativos Default
+# Experimentos Colaborativos default: 8vcpu,128
+
 
 # Workflow  ZZ proceso final con semillas
 # Este nuevo script fue desarrolado para ayudar a los alumnos en la realizacion
@@ -45,8 +46,8 @@ PARAM$modelos_rank <- c(1)
 # reemplazar por las propias semillas
 PARAM$semillas <- c(123457 , 150523, 370003, 737797, 910003)
 
-PARAM$kaggle$envios_desde <- 9500L
-PARAM$kaggle$envios_hasta <- 11500L
+PARAM$kaggle$envios_desde <- 7500L
+PARAM$kaggle$envios_hasta <- 14500L
 PARAM$kaggle$envios_salto <- 500L
 
 # para el caso que deba graficar
@@ -148,7 +149,7 @@ if (!file.exists("log_iteraciones.txt")){   # No hay ninguna hecha
 }
 #------------------------------------------------------------------------------
 # Me fijo si ya se han grabado a disco la tabla de ganancias
-if (!file.exists("tabla_ganancias.txt")&PARAM$version=="g"){   # No hay ninguna hecha
+if (!file.exists("tabla_ganancias.txt")){   # No hay ninguna hecha
   cat(
     file ="tabla_ganancias.txt",
     sep = "",
@@ -223,7 +224,7 @@ for (modelo_rank in unique(simul[,modelo_rank])) {
     # Utilizo la semilla definida en este script
     parametros$seed <- vsemilla
 
-    nombre_raiz <- paste0(
+    nom_raiz <- paste0(
       sprintf("%02d", modelo_rank),
       "_",
       sprintf("%03d", iteracion_bayesiana),
@@ -233,7 +234,7 @@ for (modelo_rank in unique(simul[,modelo_rank])) {
 
     arch_modelo <- paste0(
       "modelo_",
-      nombre_raiz,
+      nom_raiz,
       ".model"
     )
 	
@@ -262,7 +263,7 @@ for (modelo_rank in unique(simul[,modelo_rank])) {
     fwrite(tb_importancia,
       file = paste0(
         "impo_",
-        nombre_raiz,
+        nom_raiz,
         ".txt"
       ),
       sep = "\t"
@@ -284,7 +285,7 @@ for (modelo_rank in unique(simul[,modelo_rank])) {
     nom_pred <- paste0(
       "pred_",
 	  PARAM$version,"_", 
-      nombre_raiz,
+      nom_raiz,
       ".csv"
     )
 
@@ -314,7 +315,7 @@ for (modelo_rank in unique(simul[,modelo_rank])) {
         nom_submit <- paste0(
           PARAM$experimento,
           "_",
-          nombre_raiz,
+          nom_raiz,
           "_",
           sprintf("%05d", corte),
           ".csv"
