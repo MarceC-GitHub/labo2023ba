@@ -37,7 +37,7 @@ require("lightgbm")
 PARAM <- list()
 PARAM$experimento <- "cZZ6611"
 PARAM$exp_input <- "cHT6511"
-
+PARAM$version <- c("g")
 # Atencion, que cada modelos se procesa con 5 semillas, ajuste a SUS necesidades
 # Que modelos quiero, segun su posicion en el ranking e la Bayesian Optimizacion, ordenado por ganancia descendente
 PARAM$modelos_rank <- c(1)
@@ -77,7 +77,8 @@ GrabarOutput <- function() {
 OUTPUT$PARAM <- PARAM
 OUTPUT$time$start <- format(Sys.time(), "%Y%m%d %H%M%S")
 
-base_dir <- "~/buckets/b1/"
+
+base_dir <- PARAM$home
 
 # creo la carpeta donde va el experimento
 dir.create(paste0(base_dir, "exp/", PARAM$experimento, "/"),
@@ -104,7 +105,7 @@ arch_dataset <- paste0(base_dir, "exp/", TS, "/dataset_train_final.csv.gz")
 dataset <- fread(arch_dataset)
 
 # leo el dataset donde voy a aplicar el modelo final
-arch_future <- paste0(base_dir, "exp/", TS, "/dataset_future.csv.gz")
+arch_future <- paste0(base_dir, "exp/", TS, "/dataset_future_",PARAM$version,".csv.gz")
 dfuture <- fread(arch_future)
 
 # logical que me indica si los datos de future tienen la clase con valores,
@@ -116,13 +117,64 @@ dataset[, clase01 := ifelse(clase_ternaria %in% c("BAJA+1", "BAJA+2"), 1, 0)]
 
 campos_buenos <- setdiff(colnames(dataset), c("clase_ternaria", "clase01"))
 
+#------------------------------------------------------------------------------
+# Me fijo si ya se han hecho algunas de las simulaciones propuestas
+if (!file.exists("log_iteraciones.txt")){   # No hay ninguna hecha
+  cat(
+    file ="log_iteraciones.txt",
+    sep = "",
+    "version", "\t",
+    "modelo_rank", "\t",
+    "vsemilla", "\n"
+  )  
+  simul<-data.table(expand.grid(modelo_rank=PARAM$modelos_rank,
+                                vsemilla=PARAM$semillas))
+}else{                                      # Voy a simular las no hechas
+  iter_anteriores<-fread("log_iteraciones.txt")
+  iter_anteriores<-iter_anteriores[version==PARAM$version]
+  iter_anteriores<-iter_anteriores[,version:=NULL]
+  
+  iter_propuestas<-data.table(expand.grid(modelo_rank=PARAM$modelos_rank,
+                                          vsemilla=PARAM$semillas))
+  
+  if (nrow(iter_anteriores)>0)  {
+    simul<-fsetdiff(funion(iter_anteriores,iter_propuestas),iter_anteriores)
+  }else{
+    simul<-iter_propuestas
+  }
+  setorder(simul,modelo_rank,vsemilla)
+  rm(iter_anteriores,iter_propuestas)
+  
+}
+#------------------------------------------------------------------------------
+# Me fijo si ya se han grabado a disco la tabla de ganancias
+if (!file.exists("tabla_ganancias.txt")&PARAM$version=="g"){   # No hay ninguna hecha
+  cat(
+    file ="tabla_ganancias.txt",
+    sep = "",
+    "modelo_rank,", "\t",
+    "iteracion_bayesiana,", "\t",
+    "vsemilla,", "\t",
+    "envios,", "\t",
+    "ganancia", "\n"
+  )
+  tabla_larga<-data.table("modelo_rank"=integer(),
+                          "iteracion_bayesiana"=integer(),
+                          "vsemilla"= double(),
+                          "envios"=integer(),
+                          "ganancia"=double())
+} else {
+  tabla_larga<-fread("tabla_ganancias.txt",sep=",")
+  
+}
+#------------------------------------------------------------------------------
 
 # genero un modelo para cada uno de las modelos_qty MEJORES
 # iteraciones de la Bayesian Optimization
 vganancias_suavizadas <- c()
 
 imodelo <- 0L
-for (modelo_rank in PARAM$modelos_rank) {
+for (modelo_rank in unique(simul[,modelo_rank])) {
   imodelo <- imodelo + 1L
   cat("\nmodelo_rank: ", modelo_rank, ", semillas: ")
   OUTPUT$status$modelo_rank <- modelo_rank
@@ -161,7 +213,7 @@ for (modelo_rank in PARAM$modelos_rank) {
 
   sem <- 0L
 
-  for (vsemilla in PARAM$semillas)
+  for (vsemilla in simul[modelo_rank==OUTPUT$status$modelo_rank,vsemilla])
   {
     sem <- sem + 1L
     cat(sem, " ")
@@ -184,19 +236,26 @@ for (modelo_rank in PARAM$modelos_rank) {
       nombre_raiz,
       ".model"
     )
+	
+	if (!file.exists(arch_modelo)) {
+		# genero el modelo entrenando en los datos finales
+  
 
-    # genero el modelo entrenando en los datos finales
-    set.seed(parametros$seed, kind = "L'Ecuyer-CMRG")
-    modelo_final <- lightgbm(
-      data = dtrain,
-      param = parametros,
-      verbose = -100
-    )
+		set.seed(parametros$seed, kind = "L'Ecuyer-CMRG")
+		modelo_final <- lightgbm(
+		data = dtrain,
+		param = parametros,
+		verbose = -100
+		)
 
-    # grabo el modelo, achivo .model
-    lgb.save(modelo_final,
-      file = arch_modelo
-    )
+		# grabo el modelo, achivo .model
+		lgb.save(modelo_final,
+		file = arch_modelo
+		)
+	} else {
+		modelo_final<-lgb.load(arch_modelo)  # El modelo ya había corrido
+    }
+
 
     # creo y grabo la importancia de variables
     tb_importancia <- as.data.table(lgb.importance(modelo_final))
@@ -224,6 +283,7 @@ for (modelo_rank in PARAM$modelos_rank) {
 
     nom_pred <- paste0(
       "pred_",
+	  PARAM$version,"_", 
       nombre_raiz,
       ".csv"
     )
@@ -241,7 +301,6 @@ for (modelo_rank in PARAM$modelos_rank) {
       to = PARAM$kaggle$envios_hasta,
       by = PARAM$kaggle$envios_salto
     )
-
 
     setorder(tb_prediccion, -prob)
 
@@ -266,6 +325,14 @@ for (modelo_rank in PARAM$modelos_rank) {
           sep = ","
         )
       }
+	  # Logeo iteración realizada
+      cat(
+        file ="log_iteraciones.csv",
+        sep = "",
+        append = TRUE,
+        modelo_rank,",",
+        vsemilla, "\n"
+      )
     }
 
     if (future_con_clase) {
@@ -279,16 +346,30 @@ for (modelo_rank in PARAM$modelos_rank) {
         gan_sum + tb_prediccion[1:PARAM$graficar$envios_hasta, ganancia_acum]]
     }
 
-    # borro y limpio la memoria para la vuelta siguiente del for
-    rm(tb_prediccion)
+    
+	# Logueamos la iteración realizada
+    cat(
+      file = "log_iteraciones.txt",
+      append = TRUE,
+      sep = "",
+      PARAM$version, "\t",
+      modelo_rank, "\t",
+      vsemilla, "\n"
+    )
+	
+	# borro y limpio la memoria para la vuelta siguiente del for
+	rm(tb_prediccion)
     rm(tb_importancia)
     rm(modelo_final)
     gc()
+
+
   }
 
-
   if (future_con_clase) {
-    qsemillas <- length(PARAM$semillas)
+	modelo_rank0<-modelo_rank
+    qsemillas <- nrow(simul[modelo_rank==modelo_rank0])
+	
     tb_ganancias[, gan_sum := gan_sum / qsemillas]
 
     # calculo la mayor ganancia  SUAVIZADA
@@ -369,6 +450,32 @@ for (modelo_rank in PARAM$modelos_rank) {
       sep = "\t",
     )
 
+    tb_ganancias_last<-tb_ganancias
+  
+    modelo_rank0=modelo_rank
+    num_semillas<-ncol(tb_ganancias)-3
+    for (semilla in 1:num_semillas) {
+      nombre_columna<-names(tb_ganancias)[2+semilla]
+      vsemilla0<-simul[modelo_rank==modelo_rank0,2][
+        as.integer(substr(nombre_columna,2,nchar(nombre_columna) ))]
+      vsemilla0<-unlist(as.vector(vsemilla0))
+      
+      if(tabla_larga[modelo_rank==modelo_rank0&vsemilla==vsemilla0,.N]==0){
+        tabla_nueva<-data.table(modelo_rank=rep(modelo_rank0,nrow(tb_ganancias)))
+        tabla_nueva[,iteracion_bayesiana:=iteracion_bayesiana]
+        tabla_nueva[,vsemilla:=vsemilla0]
+        ganancias<-    tb_ganancias[,..nombre_columna]
+        tabla_nueva[,envios:=tb_ganancias[,envios]]
+        tabla_nueva[,ganancia:=ganancias]
+        fwrite(tabla_nueva,file="tabla_ganancias.txt",append=TRUE) 
+        colnames(tabla_larga)<-colnames(tabla_nueva)
+        tabla_larga<-rbind(tabla_larga,tabla_nueva)
+      }
+      print(c(modelo_rank0,semilla,nombre_columna))
+      print(vsemilla0)
+      print(tabla_larga[modelo_rank==modelo_rank0&vsemilla==vsemilla0,.N]==0)
+	  
+	}  
     rm(tb_ganancias)
     gc()
   }
