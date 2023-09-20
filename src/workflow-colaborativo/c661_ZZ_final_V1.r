@@ -1,5 +1,6 @@
 # Experimentos Colaborativos V1: 8vcpu,128
 
+
 # Workflow  ZZ proceso final con semillas
 # Este nuevo script fue desarrolado para ayudar a los alumnos en la realizacion
 #  de los experimentos colaborativos
@@ -325,6 +326,14 @@ for (modelo_rank in unique(simul[,modelo_rank])) {
           sep = ","
         )
       }
+	  # Logeo iteración realizada
+      cat(
+        file ="log_iteraciones.csv",
+        sep = "",
+        append = TRUE,
+        modelo_rank,",",
+        vsemilla, "\n"
+      )
     }
 
     if (future_con_clase) {
