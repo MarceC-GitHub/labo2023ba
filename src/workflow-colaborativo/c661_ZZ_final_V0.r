@@ -165,7 +165,7 @@ if (!file.exists("tabla_ganancias.txt")&PARAM$version=="g"){   # No hay ninguna 
                           "ganancia"=double())
 } else {
   tabla_larga<-fread("tabla_ganancias.txt",sep=",")
-  
+  names(tabla_larga)<-trimws(names(tabla_larga))
 }
 #------------------------------------------------------------------------------
 
