@@ -11,15 +11,15 @@ require("yaml")
 
 # Parametros del script
 PARAM <- list()
-PARAM$experimento <- "cTS6412"
+PARAM$experimento <- "yTS6410"
 
 PARAM$exp_input <- "cFE6310"
 
 # me salteo los meses duros de pandemia, pero llego hasta 201907 en training
 # entreno en 18 meses
 
-PARAM$future_g <- c(202107)
-PARAM$future_k <- c(202109)
+PARAM$future <- c(202107)
+
 
 PARAM$final_train <- c(
   202107, 202106, 202105, 202104, 202103, 202102,
@@ -28,19 +28,19 @@ PARAM$final_train <- c(
 )
 
 PARAM$train$training <- c(
-  202107, 202104, 202102, 202101,
+  202105, 202104, 202103, 202102, 202101,
   202012, 202011, 202010, 202009, 202008, 202002, 202001, 201912, 201911,
   201910, 201909, 201908, 201907
 )
 
-PARAM$train$validation <- c(202103)
-PARAM$train$testing <- c(202105,202106)
+PARAM$train$validation <- c(202106)
+PARAM$train$testing <- c(202107)
 
 # Atencion  0.1  de  undersampling de la clase mayoritaria,  los CONTINUA
 # 1.0 significa NO undersampling ,  0.1  es quedarse con el 10% de los CONTINUA
 PARAM$train$undersampling <- 0.1
 
-PARAM$train$semilla <- 123457 # cambiar por su propia semilla  !!!
+PARAM$train$semilla <- 102191 # cambiar por su propia semilla  !!!
 
 PARAM$home <- "~/buckets/b1/"
 # FIN Parametros del script
@@ -87,19 +87,19 @@ write_yaml(PARAM, file = "parametros.yml") # escribo parametros utilizados
 
 setorder(dataset, foto_mes, numero_de_cliente)
 
-# grabo los datos del futuro para Kaggle
-fwrite(dataset[foto_mes %in% PARAM$future_k, ],
-  file = "dataset_future_k.csv.gz",
+# grabo los datos del futuro
+fwrite(dataset[foto_mes %in% PARAM$future, ],
+  file = "dataset_future.csv.gz",
   logical01 = TRUE,
   sep = ","
 )
 
-# grabo los datos del futuro para Graficos
-fwrite(dataset[foto_mes %in% PARAM$future_g, ],
-       file = "dataset_future_g.csv.gz",
-       logical01 = TRUE,
-       sep = ","
-)
+
+
+
+
+
+
 
 
 # grabo los datos donde voy a entrenar los Final Models
