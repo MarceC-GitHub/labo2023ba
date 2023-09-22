@@ -87,7 +87,6 @@ write_yaml(PARAM, file = "parametros.yml") # escribo parametros utilizados
 
 setorder(dataset, foto_mes, numero_de_cliente)
 
-
 # grabo los datos del futuro para Kaggle
 fwrite(dataset[foto_mes %in% PARAM$future_k, ],
   file = "dataset_future_k.csv.gz",
