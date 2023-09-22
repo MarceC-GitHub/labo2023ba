@@ -35,15 +35,15 @@ require("lightgbm")
 
 # Parametros del script
 PARAM <- list()
-PARAM$experimento <- "ZZ6610"
-PARAM$exp_input <- "HT6510"
+PARAM$experimento <- "yZZ6610"
+PARAM$exp_input <- "yHT6510"
 
 # Atencion, que cada modelos se procesa con 5 semillas, ajuste a SUS necesidades
 # Que modelos quiero, segun su posicion en el ranking e la Bayesian Optimizacion, ordenado por ganancia descendente
 PARAM$modelos_rank <- c(1)
 
 # reemplazar por las propias semillas
-PARAM$semillas <- c(102191, 200177, 410551, 552581, 892237)
+PARAM$semillas <- c(123457 , 150523, 370003, 737797, 910003)
 
 PARAM$kaggle$envios_desde <- 9500L
 PARAM$kaggle$envios_hasta <- 11500L
@@ -104,7 +104,7 @@ arch_dataset <- paste0(base_dir, "exp/", TS, "/dataset_train_final.csv.gz")
 dataset <- fread(arch_dataset)
 
 # leo el dataset donde voy a aplicar el modelo final
-arch_future <- paste0(base_dir, "exp/", TS, "/dataset_future.csv.gz")
+arch_future <- paste0(base_dir, "exp/", TS, "/dataset_future_g.csv.gz")
 dfuture <- fread(arch_future)
 
 # logical que me indica si los datos de future tienen la clase con valores,
