@@ -514,7 +514,7 @@ dtrain <- lgb.Dataset(
 
 OUTPUT$train$ncol <- ncol(dtrain)
 OUTPUT$train$nrow <- nrow(dtrain)
-OUTPUT$train$periodos <- dataset[fold_train == 1, length(unique(foto_mes))]
+O	UTPUT$train$periodos <- dataset[fold_train == 1, length(unique(foto_mes))]
 
 kvalidate <- FALSE
 ktest <- FALSE
