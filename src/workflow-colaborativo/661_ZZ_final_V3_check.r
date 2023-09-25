@@ -105,7 +105,7 @@ arch_dataset <- paste0(base_dir, "exp/", TS, "/dataset_train_final.csv.gz")
 dataset <- fread(arch_dataset)
 
 # leo el dataset donde voy a aplicar el modelo final
-arch_future <- paste0(base_dir, "exp/", TS, "/dataset_future.csv.gz")
+arch_future <- paste0(base_dir, "exp/", TS, "/dataset_future_g.csv.gz")
 dfuture <- fread(arch_future)
 
 # logical que me indica si los datos de future tienen la clase con valores,
