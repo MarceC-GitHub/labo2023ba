@@ -10,11 +10,11 @@ options(error = function() {
 # corrida de cada paso del workflow
 
 # primeros pasos, relativamente rapidos
-#source("~/labo2023ba/src/workflow-colaborativo/new/611_CA_reparar_dataset.r")
-#source("~/labo2023ba/src/workflow-colaborativo/new/621_DR_corregir_drifting.r")
-#source("~/labo2023ba/src/workflow-colaborativo/new/631_FE_historia.r")
-#source("~/labo2023ba/src/workflow-colaborativo/new/641_TS_training_strategy.r")
+#source("~/labo2023ba/src/workflow-colaborativo/new/611_CA_reparar_dataset_v3.r")
+#source("~/labo2023ba/src/workflow-colaborativo/new/621_DR_corregir_drifting_v3.r")
+#source("~/labo2023ba/src/workflow-colaborativo/new/631_FE_historia_v3.r")
+#source("~/labo2023ba/src/workflow-colaborativo/new/641_TS_training_strategy_v3.r")
 
 # ultimos pasos, muy lentos
-source("~/labo2023ba/src/workflow-colaborativo/new/651_HT_lightgbm.r")
-source("~/labo2023ba/src/workflow-colaborativo/new/661_ZZ_final.r")
+source("~/labo2023ba/src/workflow-colaborativo/new/651_HT_lightgbm_v3.r")
+source("~/labo2023ba/src/workflow-colaborativo/new/661_ZZ_final_v3.r")
