@@ -1,4 +1,4 @@
-# Experimentos Colaborativos V1: 8vcpu,128
+# Experimentos Colaborativos default: 8vcpu,128
 
 
 # Workflow  ZZ proceso final con semillas
@@ -36,15 +36,15 @@ require("lightgbm")
 
 # Parametros del script
 PARAM <- list()
-PARAM$experimento <- "cZZ6618"
-PARAM$exp_input <- "cHT6518"
+PARAM$experimento <- "hZZ6614"
+PARAM$exp_input <- "hHT6514"
 PARAM$version <- c("g")
 # Atencion, que cada modelos se procesa con 5 semillas, ajuste a SUS necesidades
 # Que modelos quiero, segun su posicion en el ranking e la Bayesian Optimizacion, ordenado por ganancia descendente
 PARAM$modelos_rank <- c(1)
 
 # reemplazar por las propias semillas
-PARAM$semillas <- c(123457 , 150523, 370003, 737797, 910003) #136991 260269 553901 823903 999983
+PARAM$semillas <- c(123457 , 150523, 370003, 737797, 910003) ### 136991, 260269, 553901, 823903, 999983
 
 PARAM$kaggle$envios_desde <- 7500L
 PARAM$kaggle$envios_hasta <- 14500L
