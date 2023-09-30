@@ -23,7 +23,7 @@
 # en el caso de estar incompleta la clase_ternaria,  se generan los archicos para Kaggle
 
 
-		
+
 # limpio la memoria
 rm(list = ls(all.names = TRUE)) # remove all objects
 gc(full = TRUE) # garbage collection
@@ -36,9 +36,9 @@ require("lightgbm")
 
 # Parametros del script
 PARAM <- list()
-PARAM$experimento <- "ZZ6615"
-PARAM$exp_input <- "HT6515"
-PARAM$version <- c("k")
+PARAM$experimento <- "cZZ6614"
+PARAM$exp_input <- "cHT6514"
+PARAM$version <- c("g")
 # Atencion, que cada modelos se procesa con 5 semillas, ajuste a SUS necesidades
 # Que modelos quiero, segun su posicion en el ranking e la Bayesian Optimizacion, ordenado por ganancia descendente
 PARAM$modelos_rank <- c(1)

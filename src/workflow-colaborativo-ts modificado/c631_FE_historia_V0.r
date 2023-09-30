@@ -308,7 +308,7 @@ VPOS_CORTE <- c()
 
 fganancia_lgbm_meseta <- function(probs, datos) {
   vlabels <- get_field(datos, "label")
-	vpesos <- get_field(datos, "weight")
+  vpesos <- get_field(datos, "weight")
 
   tbl <- as.data.table(list(
     "prob" = probs,

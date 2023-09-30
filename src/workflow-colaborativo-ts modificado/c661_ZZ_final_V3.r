@@ -7,7 +7,7 @@
 #  y las tareas habituales de comparar el resultado de varias semillas
 #  en datos para los que se posee la clase
 
-# SIEMPRE el final train se realiza SIN undersampling<
+# SIEMPRE el final train se realiza SIN undersampling
 
 # Acepta un vector de semillas y genera un modelo para cada semilla
 # Acepta un vector de modelos_rank; se le puede especificar cuales modelos
@@ -23,7 +23,7 @@
 # en el caso de estar incompleta la clase_ternaria,  se generan los archicos para Kaggle
 
 
-		
+
 # limpio la memoria
 rm(list = ls(all.names = TRUE)) # remove all objects
 gc(full = TRUE) # garbage collection
@@ -36,15 +36,15 @@ require("lightgbm")
 
 # Parametros del script
 PARAM <- list()
-PARAM$experimento <- "ZZ6615"
-PARAM$exp_input <- "HT6515"
-PARAM$version <- c("k")
+PARAM$experimento <- "cZZ6613"
+PARAM$exp_input <- "cHT6513"
+PARAM$version <- c("g")
 # Atencion, que cada modelos se procesa con 5 semillas, ajuste a SUS necesidades
 # Que modelos quiero, segun su posicion en el ranking e la Bayesian Optimizacion, ordenado por ganancia descendente
 PARAM$modelos_rank <- c(1)
 
 # reemplazar por las propias semillas
-PARAM$semillas <- c(123457 , 150523, 370003, 737797, 910003) ## 136991, 260269, 553901, 823903, 999983
+PARAM$semillas <- c(123457 , 150523, 370003, 737797, 910003) ### 136991, 260269, 553901, 823903, 999983
 
 PARAM$kaggle$envios_desde <- 7500L
 PARAM$kaggle$envios_hasta <- 14500L

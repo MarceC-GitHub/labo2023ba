@@ -23,7 +23,7 @@
 # en el caso de estar incompleta la clase_ternaria,  se generan los archicos para Kaggle
 
 
-		
+
 # limpio la memoria
 rm(list = ls(all.names = TRUE)) # remove all objects
 gc(full = TRUE) # garbage collection

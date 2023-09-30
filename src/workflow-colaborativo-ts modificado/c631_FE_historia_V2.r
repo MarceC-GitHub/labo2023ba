@@ -17,9 +17,9 @@ require("lightgbm")
 
 # Parametros del script
 PARAM <- list()
-PARAM$experimento <- "cFE6310"
+PARAM$experimento <- "cFE6312"
 
-PARAM$exp_input <- "cDR6210"
+PARAM$exp_input <- "cDR6212"
 
 PARAM$lag1 <- TRUE
 PARAM$lag2 <- TRUE
@@ -308,7 +308,7 @@ VPOS_CORTE <- c()
 
 fganancia_lgbm_meseta <- function(probs, datos) {
   vlabels <- get_field(datos, "label")
-	vpesos <- get_field(datos, "weight")
+  vpesos <- get_field(datos, "weight")
 
   tbl <- as.data.table(list(
     "prob" = probs,
